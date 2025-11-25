@@ -1,0 +1,58 @@
+{
+  "version": 10,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "macos-gcc-debug",
+      "displayName": "macOS (Homebrew GCC 15) - Debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "/opt/homebrew/bin/gcc-15",
+        "CMAKE_CXX_COMPILER": "/opt/homebrew/bin/g++-15"
+      }
+    },
+    {
+      "name": "linux-gcc-debug",
+      "displayName": "Linux (system GCC) - Debug",
+      "generator": "Unix Makefiles",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_C_COMPILER": "/usr/bin/gcc",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "macos-gcc-build",
+      "configurePreset": "macos-gcc-debug"
+    },
+    {
+      "name": "linux-gcc-build",
+      "configurePreset": "linux-gcc-debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "macos-gcc-test",
+      "configurePreset": "macos-gcc-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "linux-gcc-test",
+      "configurePreset": "linux-gcc-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}
